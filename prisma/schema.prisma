@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  CUSTOMER
+}
+
+enum OrderStatus {
+  pending
+  waiting_payment
+  paid
+  on_process
+  ready
+  completed
+  cancelled
+}
+
+enum Kategori {
+  espresso
+  manual_brew
+  non_coffee
+  food
+  minuman_lain
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String
+  email     String   @unique
+  password  String
+  role      Role     @default(CUSTOMER)
+
+  pesanan   Pesanan[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Menu {
+  id          Int      @id @default(autoincrement())
+  nama        String
+  harga       Int
+  deskripsi   String
+  kategori    Kategori
+  image       String?
+  tersedia    Boolean  @default(true)
+
+  pesanan     Pesanan[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Pesanan {
+  id          Int         @id @default(autoincrement())
+
+  userId      Int
+  menuId      Int
+  jumlah      Int         @default(1)
+  catatan     String?
+
+  status      OrderStatus @default(pending)
+
+  user        User        @relation(fields: [userId], references: [id])
+  menu        Menu        @relation(fields: [menuId], references: [id])
+
+  transaksi   Transaksi?
+
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Transaksi {
+  id           Int      @id @default(autoincrement())
+
+  pesananId    Int      @unique
+  total        Int
+  metode_bayar String?
+  bukti        String?
+
+  pesanan      Pesanan  @relation(fields: [pesananId], references: [id])
+
+  createdAt    DateTime @default(now())
+}
