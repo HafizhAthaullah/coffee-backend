@@ -1,22 +1,14 @@
-import {
-  IsInt,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsInt, IsOptional, IsString } from 'class-validator';
 
 export class CreateTransaksiDto {
 
+  @ApiProperty({ example: 1 })
   @IsInt()
-    pesananId!: number;
+  pesananId!: number;
 
-  @IsInt()
-    total!: number;
-
+  @ApiPropertyOptional({ example: 'transfer' })
   @IsOptional()
   @IsString()
-    metode_bayar?: string;
-
-  @IsOptional()
-  @IsString()
-    bukti?: string;
+  metode_bayar?: string;
 }

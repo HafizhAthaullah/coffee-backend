@@ -1,10 +1,25 @@
-import { PartialType }
-from '@nestjs/mapped-types';
+import { ApiPropertyOptional } from '@nestjs/swagger';
+import { IsBoolean, IsInt, IsOptional, IsString } from 'class-validator';
 
-import { CreateMenuDto }
-from './create-menu.dto';
+export class UpdateMenuDto {
 
-export class UpdateMenuDto
-extends PartialType(
-  CreateMenuDto,
-) {}
+  @ApiPropertyOptional({ example: 'Cappuccino' })
+  @IsOptional()
+  @IsString()
+  nama?: string;
+
+  @ApiPropertyOptional({ example: 25000 })
+  @IsOptional()
+  @IsInt()
+  harga?: number;
+
+  @ApiPropertyOptional({ example: 'Espresso dengan susu foam lembut' })
+  @IsOptional()
+  @IsString()
+  deskripsi?: string;
+
+  @ApiPropertyOptional({ example: true })
+  @IsOptional()
+  @IsBoolean()
+  tersedia?: boolean;
+}
