@@ -12,7 +12,7 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { TransaksiService } from './transaksi.service';
 import { UpdateStatusDto } from './dto/update-status.dto';
-import { CreateTransaksiDto } from './dto/update-transaksi.dto';
+import { CreateTransaksiDto } from './dto/create-transaksi.dto';
 import { JwtAuthGuard } from 'src/helper/jwt-auth.guard';
 import { Roles } from 'src/helper/roles.decorator';
 import { RolesGuard } from 'src/helper/roles-guard';

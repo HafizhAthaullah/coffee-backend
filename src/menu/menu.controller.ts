@@ -12,6 +12,7 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { MenuService } from './menu.service';
 import { CreateMenuDto } from './dto/create-menu.dto';
+import { UpdateMenuDto } from './dto/update-menu.dto';
 import { JwtAuthGuard } from 'src/helper/jwt-auth.guard';
 import { Roles } from 'src/helper/roles.decorator';
 import { RolesGuard } from 'src/helper/roles-guard';
@@ -65,6 +66,7 @@ export class MenuController {
   @Roles('SUPER_ADMIN')
   @Patch(':id')
   @ApiConsumes('multipart/form-data')
+  @ApiBody({ type: UpdateMenuDto })
   @UseInterceptors(
     FileInterceptor('image', {
       storage: diskStorage({
@@ -93,5 +95,5 @@ export class MenuController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.menuService.remove(+id);
-}
   }
+}
