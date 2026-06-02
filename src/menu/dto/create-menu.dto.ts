@@ -2,10 +2,10 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsBoolean, IsEnum, IsInt, IsOptional, IsString } from 'class-validator';
 
 export enum Kategori {
-  espresso     = 'espresso',
-  manual_brew  = 'manual_brew',
-  non_coffee   = 'non_coffee',
-  food         = 'food',
+  coffee     = 'coffee',
+  non_coffee = 'non_coffee',
+  food       = 'food',
+  snack      = 'snack',
 }
 
 export class CreateMenuDto {
@@ -22,7 +22,7 @@ export class CreateMenuDto {
   @IsString()
   deskripsi!: string;
 
-  @ApiProperty({ enum: Kategori, example: Kategori.espresso })
+  @ApiProperty({ enum: Kategori, example: Kategori.coffee })
   @IsEnum(Kategori)
   kategori!: Kategori;
 
