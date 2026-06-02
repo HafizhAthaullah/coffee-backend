@@ -6,7 +6,6 @@ export enum Kategori {
   manual_brew  = 'manual_brew',
   non_coffee   = 'non_coffee',
   food         = 'food',
-  minuman_lain = 'minuman_lain',
 }
 
 export class CreateMenuDto {
