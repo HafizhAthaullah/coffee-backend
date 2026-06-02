@@ -23,10 +23,10 @@ enum OrderStatus {
 }
 
 enum Kategori {
-  espresso //Kopi yang diseduh dengan mesin espresso untuk menghasilkan rasa yang kuat dan konsentrasi tinggi.
-  manual_brew //Kopi yang diseduh secara manual tanpa mesin espresso untuk menonjolkan karakter asli biji kopi.
+  coffee //Kopi yang diseduh dengan mesin espresso untuk menghasilkan rasa yang kuat dan konsentrasi tinggi.
   non_coffee //Produk non-kopi seperti makanan atau minuman lainnya.
   food //Makanan yang dijual di kedai kopi.
+  snack //Makanan ringan atau camilan yang biasanya disajikan di kedai kopi, seperti kue, pastry, atau roti.
 }
 
 model User {
