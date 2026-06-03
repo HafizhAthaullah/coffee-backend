@@ -47,11 +47,12 @@ export class TransaksiController {
   @Patch('upload-bukti/:pesananId')
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(
-    FileInterceptor('file', {
+    FileInterceptor('bukti_bayar', {
       storage: diskStorage({
         destination: './uploads/bukti',
         filename: (req, file, cb) => {
-          const unique = Date.now() + '-' + Math.round(Math.random() * 1e9);
+          const unique = Date.now() + '-' +
+            Math.round(Math.random() * 1e9);
           cb(null, unique + extname(file.originalname));
         },
       }),
@@ -73,7 +74,10 @@ export class TransaksiController {
     @Param('id') id: string,
     @Body() body: any,
   ) {
-    return this.transaksiService.updateMetodeBayar(+id, body.metode_bayar);
+    return this.transaksiService.updateMetodeBayar(
+      +id,
+      body.metode_bayar,
+    );
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
