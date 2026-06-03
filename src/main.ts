@@ -16,7 +16,7 @@ import { mkdirSync } from 'fs';
 
 async function bootstrap() {
 
-  mkdirSync('./uploads/menu', { recursive: true });
+  mkdirSync('./uploads/menu',  { recursive: true });
   mkdirSync('./uploads/bukti', { recursive: true });
 
   const app =
@@ -24,7 +24,12 @@ async function bootstrap() {
       AppModule,
     );
 
-  app.enableCors();
+  app.enableCors({
+    origin:      true,
+    methods:     'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type, Authorization, Accept',
+    credentials: true,
+  });
 
   app.useStaticAssets(join(__dirname, '..', 'uploads'), {
     prefix: '/uploads/',
